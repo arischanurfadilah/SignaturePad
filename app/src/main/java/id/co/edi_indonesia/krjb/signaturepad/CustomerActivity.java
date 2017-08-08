@@ -93,6 +93,7 @@ public class CustomerActivity extends AppCompatActivity {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if (addJpgSignatureToGallery(signatureBitmap)) {
                     Toast.makeText(CustomerActivity.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CustomerActivity.this, MainActivity.class));
                 } else {
                     Toast.makeText(CustomerActivity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
                 }

@@ -1,56 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="16dp"
-    android:weightSum="1"
+    android:clipToPadding="false"
+    android:scrollbars="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     tools:context="id.co.edi_indonesia.krjb.signaturepad.MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.08"
-        android:text="Nama Perusahaan"
-        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
 
-    <Spinner
-        android:id="@+id/spinnerNama"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="13dp" />
-
-    <LinearLayout
-        android:id="@+id/buttons_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:paddingTop="16dp">
-
-
-        <Button
-            android:id="@+id/btnadmin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="true"
-            android:text="Petugas" />
-
-        <Button
-            android:id="@+id/btncs"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="true"
-            android:text="Customer" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.v7.widget.RecyclerView>

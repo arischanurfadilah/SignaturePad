@@ -2,8 +2,11 @@ package id.co.edi_indonesia.krjb.signaturepad;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,22 +28,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+import id.co.edi_indonesia.krjb.signaturepad.adapter.PerusahaanAdapter;
+import id.co.edi_indonesia.krjb.signaturepad.model.Perusahaan;
+
+public class MainActivity extends AppCompatActivity implements PerusahaanAdapter.IPerusahaaAdapter {
+    public static final String PERUSAHAAN = "perusahaan";
 
     private static final String URL_DATA = "http://192.168.11.137/edii/activity-report-edii/androidsql/get_data.php";
     public static final String ARRAY = "activity";
-    private static final String TAG_ID = "id";
-    private static final String TAG_NAMA = "nama_perusahaan";
+    private static final String TAG_NAMA= "nama_perusahaan";
+    private static final String TAG_KELUHAN= "detail_permasalahan";
 
-    ArrayList<HashMap<String, String>> productsList;
-    HashMap<String, String> map;
-
-    Spinner spinner;
-
-    String selected;
-
-    ArrayList<String> listNama = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<Perusahaan> mList = new ArrayList<>();
+    PerusahaanAdapter mAdapter;
 
 
     @Override
@@ -48,43 +48,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.btnadmin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PetugasActivity.class));
-            }
-        });
-
-        findViewById(R.id.btncs).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CustomerActivity.class));
-            }
-        });
-
-        productsList = new ArrayList<HashMap<String, String>>();
-
-        spinner = (Spinner) findViewById(R.id.spinnerNama);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new PerusahaanAdapter(this, mList);
+        recyclerView.setAdapter(mAdapter);
 
         loadRecyclerViewData();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listNama);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAdapter.notifyDataSetChanged();
 
-        spinner.setAdapter(adapter);
+    }
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selected = spinner.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+    private void fillData() {
+        Resources resources = getResources();
+        String[] arNama = resources.getStringArray(R.array.places);
+        String[] arKeluhan = resources.getStringArray(R.array.place_desc);
+        for (int i = 0; i < arNama.length; i++) {
+            mList.add(new Perusahaan(arNama[i], arKeluhan[i]));
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     private void loadRecyclerViewData() {
@@ -108,19 +91,13 @@ public class MainActivity extends AppCompatActivity {
                             for(int i = 0; i < array.length(); i++) {
                                 JSONObject c = array.getJSONObject(i);
 
-                                String id = c.getString(TAG_ID);
-                                String nama_perusahaan = c.getString(TAG_NAMA);
 
-                                listNama.add(nama_perusahaan);
-                                Log.i("ISI LISTITEM", listNama.toString());
-                                map = new HashMap<String, String>();
+                                String nmUsaha = c.getString(TAG_NAMA);
+                                String keluhan = c.getString(TAG_KELUHAN);
 
-                                map.put(TAG_ID, id);
-                                map.put(TAG_NAMA, nama_perusahaan);
-
-                                Log.i("ARRAY2", listNama.toString());
+                                mList.add(new Perusahaan(nmUsaha, keluhan));
+                                Log.i("ISI ARRAYNYA", mList.toString());
                             }
-                            spinner.setAdapter(adapter);
 
                         } catch (JSONException e){
                             e.printStackTrace();
@@ -139,5 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void doClick(int pos) {
+        Intent intent = new Intent(this, PetugasActivity.class);
+        intent.putExtra(PERUSAHAAN, mList.get(pos));
+        startActivity(intent);
     }
 }

@@ -90,6 +90,7 @@ public class PetugasActivity extends AppCompatActivity {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if (addJpgSignatureToGallery(signatureBitmap)) {
                     Toast.makeText(PetugasActivity.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PetugasActivity.this, CustomerActivity.class));
                 } else {
                     Toast.makeText(PetugasActivity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
                 }
