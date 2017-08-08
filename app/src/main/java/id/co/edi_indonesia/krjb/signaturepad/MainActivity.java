@@ -60,15 +60,15 @@ public class MainActivity extends AppCompatActivity implements PerusahaanAdapter
 
     }
 
-    private void fillData() {
-        Resources resources = getResources();
-        String[] arNama = resources.getStringArray(R.array.places);
-        String[] arKeluhan = resources.getStringArray(R.array.place_desc);
-        for (int i = 0; i < arNama.length; i++) {
-            mList.add(new Perusahaan(arNama[i], arKeluhan[i]));
-        }
-        mAdapter.notifyDataSetChanged();
-    }
+//    private void fillData() {
+//        Resources resources = getResources();
+//        String[] arNama = resources.getStringArray(R.array.places);
+//        String[] arKeluhan = resources.getStringArray(R.array.place_desc);
+//        for (int i = 0; i < arNama.length; i++) {
+//            mList.add(new Perusahaan(arNama[i], arKeluhan[i]));
+//        }
+//        mAdapter.notifyDataSetChanged();
+//    }
 
     private void loadRecyclerViewData() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements PerusahaanAdapter
                                 String keluhan = c.getString(TAG_KELUHAN);
 
                                 mList.add(new Perusahaan(nmUsaha, keluhan));
+                                mAdapter.notifyDataSetChanged();
                                 Log.i("ISI ARRAYNYA", mList.toString());
                             }
 

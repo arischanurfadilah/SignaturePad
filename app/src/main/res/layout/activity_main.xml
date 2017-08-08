@@ -11,5 +11,4 @@
     android:paddingBottom="8dp"
     tools:context="id.co.edi_indonesia.krjb.signaturepad.MainActivity">
 
-
 </android.support.v7.widget.RecyclerView>
