@@ -1,6 +1,7 @@
 package id.co.edi_indonesia.krjb.signaturepad.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +36,17 @@ public class PerusahaanAdapter extends RecyclerView.Adapter<PerusahaanAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Perusahaan perusahaan = perusahaanList.get(position);
+        final Perusahaan perusahaan = perusahaanList.get(position);
+
         holder.tvNama.setText(perusahaan.nama);
         holder.tvKeluhan.setText(perusahaan.keluhan);
+
+        holder.cItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIPerusahaanAdapter.doClick(perusahaan.id);
+            }
+        });
     }
 
     @Override
@@ -48,13 +57,15 @@ public class PerusahaanAdapter extends RecyclerView.Adapter<PerusahaanAdapter.Vi
     }
 
     public interface IPerusahaaAdapter {
-        void doClick(int pos);
+        void doClick(String pos);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //ImageView ivFoto;
+
+//        TextView tvId;
         TextView tvNama;
         TextView tvKeluhan;
+        CardView cItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,12 +73,7 @@ public class PerusahaanAdapter extends RecyclerView.Adapter<PerusahaanAdapter.Vi
             tvNama = (TextView) itemView.findViewById(R.id.textViewNama);
             tvKeluhan = (TextView) itemView.findViewById(R.id.textViewKeluhan);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mIPerusahaanAdapter.doClick(getAdapterPosition());
-                }
-            });
+            cItem = (CardView) itemView.findViewById(R.id.itemCard);
 
         }
     }
