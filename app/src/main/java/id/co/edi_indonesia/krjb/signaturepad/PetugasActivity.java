@@ -22,8 +22,7 @@ import id.co.edi_indonesia.krjb.signaturepad.handler.RequestHandler;
 
 public class PetugasActivity extends AppCompatActivity {
 
-//    public static final String UPLOAD_URL = "http://192.168.11.137/edii/activity-report-edii/androidsql/coba.php";
-    public static final String UPLOAD_URL = "http://192.168.43.113/edii/coba.php";
+    public static final String UPLOAD_URL = "http://192.168.11.137/edii/petugas_upload.php";
     public static final String TAG_ID = "id";
     public static final String TAG_PETUGAS = "ttd_petugas";
 //    public static final String TAG_NAMA = "nama_perusahaan";
@@ -81,7 +80,6 @@ public class PetugasActivity extends AppCompatActivity {
             public void onClick(View view) {
                 bitmap = mSignaturePad.getSignatureBitmap();
 
-
                 Log.i("BITMAPNYA", bitmap.toString());
                 uploadImage();
             }
@@ -122,7 +120,11 @@ public class PetugasActivity extends AppCompatActivity {
 
                 Log.i("UPLOADIMAGE", uploadImage);
                 String result = rh.sendPostRequest(UPLOAD_URL,data);
-                startActivity(new Intent(PetugasActivity.this, CustomerActivity.class));
+//                startActivity(new Intent(PetugasActivity.this, CustomerActivity.class));
+
+                Intent i = new Intent(PetugasActivity.this, CustomerActivity.class);
+                i.putExtra("TAG_ID", id);
+                startActivity(i);
 
                 return result;
             }

@@ -34,7 +34,7 @@ import id.co.edi_indonesia.krjb.signaturepad.model.Perusahaan;
 public class MainActivity extends AppCompatActivity implements PerusahaanAdapter.IPerusahaaAdapter {
     public static final String PERUSAHAAN = "perusahaan";
 
-    private static final String URL_DATA = "http://192.168.43.113/edii/get_data.php";
+    private static final String URL_DATA = "http://192.168.11.137/edii/get_data.php";
     public static final String ARRAY = "activity";
     private static final String TAG_ID= "id";
     private static final String TAG_NAMA= "nama_perusahaan";
