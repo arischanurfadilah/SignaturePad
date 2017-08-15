@@ -22,7 +22,7 @@ import id.co.edi_indonesia.krjb.signaturepad.handler.RequestHandler;
 
 public class PetugasActivity extends AppCompatActivity {
 
-    public static final String UPLOAD_URL = "http://192.168.11.137/edii/petugas_upload.php";
+    public static final String UPLOAD_URL = "http://192.168.11.9/admin-activity-baru/petugas_upload.php";
     public static final String TAG_ID = "id";
     public static final String TAG_PETUGAS = "ttd_petugas";
 //    public static final String TAG_NAMA = "nama_perusahaan";

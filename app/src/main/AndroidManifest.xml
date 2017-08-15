@@ -8,7 +8,7 @@
     <application
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="Signature Pad"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -23,7 +23,7 @@
         <activity android:name=".CustomerActivity"
             android:label="Customer Signature"/>
         <activity android:name=".PetugasActivity"
-            android:label="Admin Signature"></activity>
+            android:label="Technical Support Signature"></activity>
     </application>
 
 </manifest>
